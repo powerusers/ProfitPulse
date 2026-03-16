@@ -150,7 +150,7 @@ export default function ProductionPage() {
           <Card padding="none">
             <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900">Recent Production Runs</h2>
-              <Badge variant="primary">{runs.length} Runs</Badge>
+              <Badge variant="info">{runs.length} Runs</Badge>
             </div>
             
             <div className="overflow-x-auto">

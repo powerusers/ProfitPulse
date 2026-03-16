@@ -59,7 +59,7 @@ export interface ProductionRun {
   created_at: string;
   updated_at: string;
   // Joined
-  finished_good?: FinishedGood;
+  finished_goods?: FinishedGood;
 }
 
 export interface BillOfMaterial {
@@ -110,7 +110,7 @@ export interface Sale {
   created_at: string;
   updated_at: string;
   // Joined
-  finished_good?: FinishedGood;
+  finished_goods?: FinishedGood;
 }
 
 export interface InventoryTransaction {
