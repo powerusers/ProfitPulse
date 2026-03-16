@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { requireOrganization } from '@/lib/supabase/auth';
-import { updateWeightedAvgCost } from '@/lib/business-logic/weighted-avg-cost';
+
 
 // GET /api/stock-purchases — list purchases
 export async function GET(req: NextRequest) {
@@ -64,21 +64,6 @@ export async function POST(req: NextRequest) {
       .single();
 
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-
-    // Update weighted average cost and quantity
-    await updateWeightedAvgCost(supabase, body.raw_material_id, quantity, unitCost);
-
-    // Log inventory transaction
-    await supabase.from('inventory_transactions').insert({
-      org_id: org.id,
-      raw_material_id: body.raw_material_id,
-      transaction_type: 'PURCHASE',
-      quantity_change: quantity,
-      transaction_date: body.purchase_date,
-      reference_type: 'stock_purchases',
-      reference_id: purchase.id,
-      notes: `Purchase: ${quantity} units @ ₹${unitCost}`,
-    });
 
     return NextResponse.json(purchase, { status: 201 });
   } catch {

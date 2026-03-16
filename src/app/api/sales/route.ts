@@ -63,18 +63,8 @@ export async function POST(req: NextRequest) {
 
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
 
-    // Run BOM backflushing — auto-deduct raw materials
-    const backflushResult = await processBOMBackflush(
-      supabase,
-      sale.id,
-      body.finished_good_id,
-      quantity,
-      org.id
-    );
-
     return NextResponse.json({
       sale,
-      backflush: backflushResult,
     }, { status: 201 });
   } catch {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
