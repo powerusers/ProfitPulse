@@ -43,9 +43,23 @@ export interface FinishedGood {
   cost_price: number | null;
   unit_of_measurement: string | null;
   description: string | null;
+  current_quantity: number;
   is_active: boolean;
   created_at: string;
   updated_at: string;
+}
+
+export interface ProductionRun {
+  id: string;
+  org_id: string;
+  finished_good_id: string;
+  quantity_produced: number;
+  production_date: string;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+  // Joined
+  finished_good?: FinishedGood;
 }
 
 export interface BillOfMaterial {
@@ -103,7 +117,7 @@ export interface InventoryTransaction {
   id: string;
   org_id: string;
   raw_material_id: string;
-  transaction_type: 'PURCHASE' | 'SALE_DEDUCTION' | 'MANUAL_ADJUSTMENT' | 'WASTE_WRITE_OFF';
+  transaction_type: 'PURCHASE' | 'SALE_DEDUCTION' | 'MANUAL_ADJUSTMENT' | 'WASTE_WRITE_OFF' | 'PRODUCTION_CONSUMPTION';
   quantity_change: number;
   transaction_date: string;
   reference_type: string | null;

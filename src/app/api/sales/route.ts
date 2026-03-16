@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST /api/sales — log a sale with BOM backflushing
+// POST /api/sales — log a sale with finished goods deduction
 export async function POST(req: NextRequest) {
   try {
     const org = await requireOrganization();
